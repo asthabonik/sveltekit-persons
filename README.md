@@ -39,8 +39,8 @@ npm run dev
 # Project Structure
 Here’s an overview of the project structure:
 
-Copy
-sveltekit-intern/
+```
+sveltekit-persons/
 ├── src/
 │   ├── lib/               # Shared components and utilities
 │   ├── routes/            # Application routes and pages
@@ -50,44 +50,49 @@ sveltekit-intern/
 ├── package.json           # Project dependencies and scripts
 ├── svelte.config.js       # SvelteKit configuration
 └── README.md              # This file
-# Available Scripts
-npm run dev: Start the development server.
+```
 
-npm run build: Build the project for production.
+---
 
-npm run preview: Preview the production build locally.
+## Available Scripts
 
-npm run lint: Lint the codebase for errors and style issues.
+- `npm run dev`: Start the development server.
+- `npm run build`: Build the project for production.
+- `npm run preview`: Preview the production build locally.
+- `npm run lint`: Lint the codebase for errors and style issues.
 
-# Contributing
+---
+
+## Contributing
+
 Contributions are welcome! If you’d like to contribute to this project, please follow these steps:
 
-# Fork the repository.
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature/YourFeatureName`).
+3. Commit your changes (`git commit -m 'Add some feature'`).
+4. Push to the branch (`git push origin feature/YourFeatureName`).
+5. Open a pull request.
 
-Create a new branch (git checkout -b feature/YourFeatureName).
-
-Commit your changes (git commit -m 'Add some feature').
-
-Push to the branch (git push origin feature/YourFeatureName).
-
-Open a pull request.
-
+---
 # License
 This project is licensed under the MIT License. See the LICENSE file for details.
 
-# Acknowledgments
-SvelteKit Documentation for providing an excellent framework.
+## Acknowledgments
 
-My mentors and colleagues for their guidance during the internship.
+- [SvelteKit Documentation](https://kit.svelte.dev/docs) for providing an excellent framework.
+- My mentors and colleagues for their guidance during the internship.
 
-Contact
+---
+
+## Contact
+
 If you have any questions or feedback, feel free to reach out:
 
-Name: Astha Bonik
+- **Name**: Md. Raquebul Hasan
+- **Email**: [asthabonik@gmail.com](mailto:asthabonik@gmail.com)
 
-#Email: asthabonik@gmail.com
-
-GitHub: asthabonik
+---
 
 Thank you for checking out my project! 🚀
 
+---
