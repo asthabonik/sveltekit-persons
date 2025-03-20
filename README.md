@@ -1,4 +1,4 @@
-# Welcome to the SvelteKit Intern Project!  
+# Welcome to the SvelteKit Persons Project!  
 
 This web application is built using SvelteKit to showcase professional skills and learning progress during an internship at **Astha IT Solutions**. It features dynamic routing, content management, and integration with external APIs, providing a hands-on learning experience.
 
