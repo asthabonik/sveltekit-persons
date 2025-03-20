@@ -70,7 +70,7 @@
     async function deletePerson(event) {
         const delPerson = event.detail.person;
         persons = persons.filter(person => person._id != delPerson._id);
-
+        
         try {
             const { response, json } = await api.del(base_endpoint, `${API_PATHS.PERSONS}?personId=${delPerson._id}`, { aud: "aud" });
             showToast('Person deleted!');
