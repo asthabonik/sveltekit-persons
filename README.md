@@ -1,4 +1,3 @@
-```markdown
 # Welcome to the SvelteKit Persons Project!  
 
 Welcome to the **SvelteKit Persons** project! This web application is
