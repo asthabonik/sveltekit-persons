@@ -1,7 +1,9 @@
 ```markdown
 # Welcome to the SvelteKit Persons Project!  
 
-Welcome to the **SvelteKit Persons** project! This web application is built using **SvelteKit** and demonstrates dynamic content handling, API integration, and routing features.
+Welcome to the **SvelteKit Persons** project! This web application is
+built using **SvelteKit** and demonstrates
+dynamic content handling, API integration, and routing features.
 
 ## 🚀 Features
 
