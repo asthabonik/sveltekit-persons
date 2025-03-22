@@ -41,7 +41,7 @@ npm install
 Create a `.env` file and add the necessary environment variables:
 
 ```env
-BASE_ENDPOINT=https://your-api-endpoint.com
+PUBLIC_API_ENDPOINT=https://your-api-endpoint.com
 ```
 
 ### Run the Development Server
