@@ -6,7 +6,7 @@ export default defineConfig({
         server: {
                 host: '0.0.0.0',
                 scriptPort: true,
-                allowedHosts: ['julastic.com', 'asthain.fun'], // Add your host>
+                allowedHosts: ['asthain.fun'], // Add your host>
         port: 5173,
       },
 });
