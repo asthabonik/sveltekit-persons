@@ -5,11 +5,11 @@
 
 	const dispatch = createEventDispatcher();
 
-	function editContact(person) {
+	function editPerson(person) {
 	  dispatch('edit', { person });
 	}
 
-	function deleteContact(person) {
+	function deletePerson(person) {
 	  dispatch('delete', { person });
 	}
 
@@ -59,8 +59,8 @@
 					</td>
 					<td>{person.email}</td>					
 					<th>						
-						<button class="btn btn-error text-white btn-xs" on:click={() => editContact(person)}>Edit</button>
-						<button class="btn btn-error text-white btn-xs" on:click={() => deleteContact(person)}>Delete</button>
+						<button class="btn btn-error text-white btn-xs" on:click={() => editPerson(person)}>Edit</button>
+						<button class="btn btn-error text-white btn-xs" on:click={() => deletePerson(person)}>Delete</button>
 					</th>
 				</tr>
 			{/each}
