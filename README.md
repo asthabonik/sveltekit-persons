@@ -136,7 +136,7 @@ If you have any questions or feedback, feel free to reach out:
 Thank you for checking out the **SvelteKit Persons** project! 🚀
 
 ---
-
+```
 ### Key Features of the GitHub Formatting:
 1. **Headings**: Use `#`, `##`, `###` for headings and subheadings.
 2. **Code Blocks**: Use triple backticks (```` ``` ````) for code blocks.
