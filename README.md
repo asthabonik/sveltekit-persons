@@ -136,13 +136,4 @@ If you have any questions or feedback, feel free to reach out:
 Thank you for checking out the **SvelteKit Persons** project! 🚀
 
 ---
-```
-### Key Features of the GitHub Formatting:
-1. **Headings**: Use `#`, `##`, `###` for headings and subheadings.
-2. **Code Blocks**: Use triple backticks (```` ``` ````) for code blocks.
-3. **Lists**: Use `-` or `*` for unordered lists and numbers for ordered lists.
-4. **Bold and Italics**: Use `**` for bold and `*` for italics.
-5. **Links**: Use `[text](url)` for hyperlinks.
-6. **Environment Variables**: Use triple backticks with `env` for syntax highlighting.
 
-Let me know if you need further adjustments! 🚀
