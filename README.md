@@ -79,7 +79,13 @@ sveltekit-persons/
 - `npm run lint`: Lint the codebase for errors and style issues.
 
 ---
+## 📂 Backend Repository
 
+The backend API for this project is hosted separately. You can check out the backend source code here:
+
+🔗 [Backend GitHub Repository](https://github.com/asthabonik/persons-backend)
+
+---
 ## 📖 Usage Guidelines
 
 ### Adding a Person
