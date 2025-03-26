@@ -1,8 +1,8 @@
 <script>
 	import { createEventDispatcher } from 'svelte';
+	import { persons } from '$stores/persons';
 
-	export let persons = [];
-
+	
 	const dispatch = createEventDispatcher();
 
 	function editPerson(person) {
@@ -33,7 +33,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			{#each persons as person}
+			{#each $persons as person}
 				<tr>
 					<th>
 						<label>

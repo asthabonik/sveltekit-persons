@@ -2,6 +2,8 @@ import * as api from '$lib/script/api';
 import { base_endpoint } from '$lib/app/env.js';
 import { API_PATHS } from '$lib/config';
 
+
+
 async function getPersons() {
   try {
     const { response, json } = await api.get(base_endpoint, API_PATHS.PERSONS, { aud: "aud" });
