@@ -43,7 +43,7 @@ async function send({ method, path, data, session, base }: SendOptions):
     const json = await response.json();
 
     if (DEBUG_MODE) {
-      console.debug('[DEBUG] Response:', json, PUBLIC_DEBUG_MODE);
+      console.debug('[DEBUG] Response:', json);
     }
 
     return { response, json };
