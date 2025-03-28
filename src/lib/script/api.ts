@@ -1,139 +1,97 @@
-/*
- * Make requests to some backend
- * Based on https://github.com/sveltejs/realworld/blob/master/src/node_modules/api.js
- */
 import { PUBLIC_DEBUG_MODE } from '$env/static/public';
 
-async function send({
-  method,
-  path,
-  data,
-  session,
-  base,
-}: {
+const DEBUG_MODE = PUBLIC_DEBUG_MODE === 'true'; // Ensure boolean conversion
+
+interface Session {
+  aud?: string;
+  session_id?: string;
+  jwt?: string;
+}
+
+interface SendOptions {
   method: string;
   path: string;
   data?: any;
-  session: any;
+  session?: Session;
   base: string;
-}): Promise<{
-  response: any;
-  json: any;
-}> {
-  // const fetch =
-  //   typeof window !== 'undefined'
-  //     ? window.fetch
-  //     : await import('node-fetch').then((mod) => mod.default);
-  const opts: any = { method, headers: {} };
+}
+
+async function send({ method, path, data, session, base }: SendOptions): 
+  Promise<{ response: Response; json: any }> {
+  
+  const opts: RequestInit = {
+    method,
+    headers: new Headers(),
+  };
 
   if (data) {
-
-    if (data.creds) {
-      opts.credentials = 'include';
-      delete data.creds;
-    }
-
-    if (!data.type) {
-      opts.headers['Content-Type'] = 'application/json';
-      opts.body = JSON.stringify(data);      
-    } 
-    else if (data.type === 'formData') {
-      // console.log('formData gdgd', data);
-      // TODO: refactor this to work better for file uploads
-      const formData = new FormData();
-      formData.append('avatar', data.image[0]);
-      opts.body = formData;
-      // NOTE: for `fetch` we don't send Content-Type
-      // opts.headers['Content-Type'] = 'multipart/form-data';
-    }
+    prepareRequestBody(opts, data);
   }
 
   if (session) {
-    // Set the JWT_AUD header
-    if (session.aud) {
-      opts.headers['JWT_AUD'] = session.aud;
-    }
-    // Set the session_id header
-    if (session.session_id) {
-      opts.headers['session_id'] = session.session_id;
-    }
-    
-    // Set the Authorization header
-    if (session.jwt) {
-      if (session.jwt.includes('Bearer')) {
-        opts.headers['Authorization'] = session.jwt;
-      } else {
-        opts.headers['Authorization'] = `Bearer ${session.jwt}`;
-      }
-    }
+    attachSessionHeaders(opts.headers as Headers, session);
   }
 
-  const fullPath: string = encodeURI(`${base}/${path}`);
-  // opts.headers['jwt-tukun-mama'] =  `jwt-tukun-tion`;    
+  const fullPath = encodeURI(`${base}/${path}`);
 
-  if (PUBLIC_DEBUG_MODE == true) {    
-    console.log(method, fullPath);
-    console.log(opts);
+  if (DEBUG_MODE) {
+    console.debug(`[DEBUG] ${method} ${fullPath}`, opts);
   }
 
-  // console.log('fullPath', fullPath);
-  // console.log('opts', opts);
+  try {
+    const response = await fetch(fullPath, opts);
+    const json = await response.json();
 
-  const response = await fetch(fullPath, opts);
-  const json: any = await response.json();    
-  // console.log('From api.ts DEBUG:', json);
-  if (PUBLIC_DEBUG_MODE == true) {
-    console.log('DEBUG:', json);
+    if (DEBUG_MODE) {
+      console.debug('[DEBUG] Response:', json, PUBLIC_DEBUG_MODE);
+    }
+
+    return { response, json };
+  } catch (error) {
+    console.error(`[ERROR] Request failed: ${method} ${fullPath}`, error);
+    throw new Error('Network request failed');
   }
-  return { response, json };
 }
 
-/*
- * Shortcut methods for send
+/**
+ * Helper function to attach request body based on data type
  */
-export function get(
-  base: string,
-  path: string,  
-  session?: any
-): Promise<{
-  response: any;
-  json: any;
-}> {
-  return send({ method: 'GET', path, session, base });
+function prepareRequestBody(opts: RequestInit, data: any) {
+  if (data.creds) {
+    (opts as any).credentials = 'include';
+    delete data.creds;
+  }
+
+  if (!data.type) {
+    opts.headers = new Headers({ 'Content-Type': 'application/json' });
+    opts.body = JSON.stringify(data);
+  } else if (data.type === 'formData') {
+    const formData = new FormData();
+    formData.append('avatar', data.image[0]);
+    opts.body = formData;
+  }
 }
 
-export function del(
-  base: string,
-  path: string,
-  data: any,
-  session?: any
-): Promise<{
-  response: any;
-  json: any;
-}> {
-  return send({ method: 'DELETE', path, data, session, base });
+/**
+ * Helper function to attach session headers
+ */
+function attachSessionHeaders(headers: Headers, session: Session) {
+  if (session.aud) headers.set('JWT_AUD', session.aud);
+  if (session.session_id) headers.set('session_id', session.session_id);
+  if (session.jwt) headers.set('Authorization', session.jwt.startsWith('Bearer') ? session.jwt : `Bearer ${session.jwt}`);
 }
 
-export function post(
-  base: string,
-  path: string,
-  data: any,
-  session?: any
-): Promise<{
-  response: any;
-  json: any;
-}> {
-  return send({ method: 'POST', path, data, session, base });
-}
+/**
+ * Shortcut functions for API requests
+ */
+export const get = (base: string, path: string, session?: Session) => 
+  send({ method: 'GET', path, session, base });
 
-export function put(
-  base: string,
-  path: string,
-  data: any,
-  session?: any
-): Promise<{
-  response: any;
-  json: any;
-}> {
-  return send({ method: 'PUT', path, data, session, base });
-}
+export const del = (base: string, path: string, data: any, session?: Session) =>
+  send({ method: 'DELETE', path, data, session, base });
+
+export const post = (base: string, path: string, data: any, session?: Session) =>
+  send({ method: 'POST', path, data, session, base });
+
+export const put = (base: string, path: string, data: any, session?: Session) =>
+  send({ method: 'PUT', path, data, session, base });
